@@ -1,0 +1,67 @@
+<template>
+    <div class="card">
+        <div class="card-header">
+            <h3>editar perfil</h3>
+        </div>
+        <div class="card-body">
+            <div
+                style="width: 128px ; height: 128px ; float: left ; margin: 1px ;border: black 1px solid"
+                v-for="f in preImg"
+                class="card"
+
+            >   <a href="">
+                <img class="card-img" :src="f" alt="Card image"
+                     style="width: 128px ; height: 128px"
+                >
+                </a>
+                <div class="card-img-overlay">
+                    <button class="ui basic button icon"
+                            style="margin-top: 68px; margin-left: -12px;"
+
+                    >
+                        <i class="icon close"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="" enctype="multipart/form-data">
+
+                <hr>
+                <input @change="preview" type="file"  id="files" name="files[]" multiple />
+
+            </form>
+
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "perfil",
+        data(){
+          return{
+              preImg:[]
+          }
+        },
+        methods:{
+            preview(e){
+                let files = e.target.files;
+                if(files){
+                    let files_count = files.length;
+                    for (let i=0; i<files_count; i++){
+                        let reader = new FileReader();
+                        reader.onload = e => {
+                            this.preImg.push(e.target.result)
+                        }
+                        reader.readAsDataURL(files[i]);
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>
